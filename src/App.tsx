@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {Infos} from "./Utils"
+import {Infos} from "./components/Utils/Utils"
 import Tablecompo from './components/Tablecompo';
+import AddForm from './components/AddForm';
 
 
 // type Userinfos = {
@@ -26,7 +27,7 @@ function App() {
 //   },[])
   return (
     <div className=''>
-
+<AddForm/>
     <h1 className='text-2xl text-center my-10'>Simple CRUD using typescript</h1>
     <Tablecompo />
     </div>

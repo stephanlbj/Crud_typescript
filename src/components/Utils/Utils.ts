@@ -6,6 +6,8 @@ export type User ={
     job:string
     year:string
 }
+
+
 export let Infos: User[] = [
     {
         id:1,

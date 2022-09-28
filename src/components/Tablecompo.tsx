@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
-import {Infos, User} from "../Utils"
+import {Infos, User} from "./Utils/Utils"
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { FcApproval } from "react-icons/fc";
+import AddBtn from './AddBtn';
+import { TableValue } from './Utils/tableHeading';
+import { Usemycontext } from '../Context/Usecontext';
 
 
 
@@ -13,13 +16,13 @@ type DataToBeChanged = {
 
 }
 
-const arr: string[] = ["ID","Name", "Work","Year", "Actions"]
-
 
 
 
 const Tablecompo = () => {
 
+    const {Visible, setIs_visible, arrInfos, setarrInfos} = Usemycontext()
+  
     const [userinfos, setuserinfos] = useState(Infos)
     const [update, setupdate] = useState<number>(0)
     const [datatoChange, setdatatoChange] = useState<DataToBeChanged>({
@@ -76,7 +79,7 @@ const OnsubMit = (e:React.FormEvent<HTMLFormElement>)=>{
 
     if(update != 0)
     return(
-        <div className='border border-gray-300 w-fit mx-auto p-3'>
+        <div className='border border-gray-300 w-fit mx-auto p-3 '>
             <form onSubmit={OnsubMit} className='  flex items-center justify-center space-x-4'>
                 <input value={datatoChange.name} name="name" onChange={HandleChange} className="px-2 py-1"/>
                 <input value={datatoChange.job} name="job" onChange={HandleChange} className="px-2 py-1"/>
@@ -88,19 +91,23 @@ const OnsubMit = (e:React.FormEvent<HTMLFormElement>)=>{
     )
 
   return (
-<div className=' w-full overflow-x-auto'>    
-<table className=' border border-gray-300 rounded-md mx-auto w-10/12 overflow-x-auto'>
+<div className=' w-full overflow-x-auto'>   
+
+
+<AddBtn/>
+
+<table className=' my-10 border border-gray-300 rounded-md mx-auto w-10/12 overflow-x-auto'>
   <thead className='overflow-x-auto'>
     <tr className='border-b border-gray-500 py-3 w-full'>
-     {arr.map((item, ind)=>(
+     {TableValue.map((item, ind)=>(
    <th key={ind}><div className='py-3'>{item}</div></th>
      ))}
     </tr>
   </thead>
   <tbody className='overflow-x-auto' >
-  {userinfos.map((item)=>(
+  {userinfos.slice().reverse().map((item)=>(
   <tr key={item.id}  className='text-center '>
-      <td>{item.id}</td>
+     
      <td>{item.name}</td>
      <td ><h1 className='text-gray-700'>{item.job}</h1></td>
      <td>{item.year}</td>
